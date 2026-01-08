@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPG to PDF Converter - IloveoPDF</title>
+    <meta name="description" content="Convert JPG, PNG, and other image files to PDF documents. Merge multiple images into a single PDF. Free online tool, no registration required.">
+    <meta name="keywords" content="JPG to PDF, image to PDF, convert JPG to PDF, PNG to PDF, image converter, PDF converter, free PDF tools">
+    <meta name="author" content="IloveoPDF">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF9A3C;
+            --light-orange: #FFF3E0;
+            --dark-orange: #E55A00;
+            --yellow-accent: #FFD166;
+            --dark-yellow: #FFB800;
+            --dark-gray: #333333;
+            --medium-gray: #666666;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--yellow-accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-orange);
+        }
+        
+        .logo-text span {
+            color: var(--primary-orange);
+        }
+        
+        /* Main Navigation with Categories */
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-categories {
+            display: flex;
+            gap: 5px;
+            margin-right: 20px;
+        }
+        
+        .nav-category {
+            background-color: var(--light-orange);
+            color: var(--primary-orange);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        
+        .nav-category:hover {
+            background-color: var(--primary-orange);
+            color: white;
+        }
+        
+        .nav-category i {
+            margin-right: 5px;
+        }
+        
+        .main-nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .main-nav a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .main-nav a.active {
+            color: var(--primary-orange);
+        }
+        
+        .main-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-orange);
+            border-radius: 3px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--medium-gray);
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        .language-selector:hover {
+            background-color: var(--light-orange);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+            cursor: pointer;
+        }
+        
+        /* Tool Page Layout */
+        .tool-page {
+            padding: 60px 0;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.8rem;
+            color: var(--dark-orange);
+            margin-bottom: 15px;
+        }
+        
+        .tool-header p {
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+        
+        .tool-upload-area {
+            border: 3px dashed var(--light-orange);
+            border-radius: 12px;
+            padding: 60px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .tool-upload-area:hover {
+            border-color: var(--primary-orange);
+            background-color: var(--light-orange);
+        }
+        
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+        
+        .upload-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-orange);
+        }
+        
+        .upload-text p {
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .upload-btn:hover {
+            background-color: var(--dark-orange);
+            transform: translateY(-2px);
+        }
+        
+        .tool-options {
+            background-color: var(--light-orange);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .tool-options h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--dark-orange);
+        }
+        
+        .option-group {
+            margin-bottom: 20px;
+        }
+        
+        .option-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+        
+        .option-select, .option-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .option-select:focus, .option-input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        
+        .process-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, var(--primary-orange), var(--yellow-accent));
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .process-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .tool-result {
+            background-color: #f8fff8;
+            border: 2px solid #e0f7e0;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+        
+        .result-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .tool-result h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2E7D32;
+        }
+        
+        .tool-result p {
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .download-btn:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+        
+        /* Back to Home Button */
+        .back-home {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .back-home:hover {
+            color: var(--dark-orange);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222222;
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-orange);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-orange);
+            padding-left: 5px;
+        }
+        
+        .footer-about p {
+            color: #aaaaaa;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-orange);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-contact {
+            color: #aaaaaa;
+            margin-top: 15px;
+        }
+        
+        .footer-contact i {
+            color: var(--primary-orange);
+            margin-right: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .nav-categories {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .tool-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tool-container {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .main-nav {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .language-selector {
+                display: none;
+            }
+            
+            .tool-container {
+                padding: 20px;
+            }
+            
+            .tool-upload-area {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Categories -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="logo-text">Ilove<span>oPDF</span></div>
+                </a>
+                
+                <nav class="main-nav" id="mainNav">
+                    <!-- Categories in Header -->
+                    <div class="nav-categories">
+                        <a href="jpg-to-pdf.html" class="nav-category">
+                            <i class="fas fa-exchange-alt"></i> Convert PDF
+                        </a>
+                        <a href="compress-pdf.html" class="nav-category">
+                            <i class="fas fa-compress-alt"></i> Compress PDF
+                        </a>
+                        <a href="merge-pdf.html" class="nav-category">
+                            <i class="fas fa-copy"></i> Merge PDF
+                        </a>
+                        <a href="edit-pdf.html" class="nav-category">
+                            <i class="fas fa-edit"></i> Edit PDF
+                        </a>
+                        <a href="all-tools.html" class="nav-category">
+                            <i class="fas fa-tools"></i> All PDF Tools
+                        </a>
+                    </div>
+                    
+                    <!-- Main Navigation Links -->
+                    <a href="index.html">Home</a>
+                    <a href="all-tools.html" class="active">Tools</a>
+                    <a href="how-it-works.html">How It Works</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <i class="fas fa-globe"></i>
+                        <span>EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Tool Page Content -->
+        <section class="tool-page">
+            <div class="container">
+                <a href="index.html" class="back-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                
+                <div class="tool-header">
+                    <h1>JPG to PDF Converter</h1>
+                    <p>Convert JPG, PNG, and other image files to PDF documents. Merge multiple images into a single PDF.</p>
+                </div>
+                
+                <div class="tool-container">
+                    <div class="tool-upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="upload-text">
+                            <h3>Upload Your Images</h3>
+                            <p>Drag and drop JPG/PNG files here or click to browse</p>
+                            <button class="upload-btn" id="uploadBtn">
+                                <i class="fas fa-folder-open"></i> Choose Files
+                            </button>
+                        </div>
+                        <input type="file" id="fileInput" style="display: none;" accept=".jpg,.jpeg,.png,.bmp,.gif" multiple>
+                    </div>
+                    
+                    <div id="toolOptions" style="display: none;">
+                        <div class="tool-options">
+                            <h3>Conversion Settings</h3>
+                            <div class="option-group">
+                                <label for="pageSize">Page Size:</label>
+                                <select id="pageSize" class="option-select">
+                                    <option value="a4">A4 (Default)</option>
+                                    <option value="letter">Letter</option>
+                                    <option value="legal">Legal</option>
+                                    <option value="a3">A3</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label for="orientation">Orientation:</label>
+                                <select id="orientation" class="option-select">
+                                    <option value="portrait">Portrait</option>
+                                    <option value="landscape">Landscape</option>
+                                    <option value="auto">Auto Detect</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label for="margin">Margin Size:</label>
+                                <select id="margin" class="option-select">
+                                    <option value="small">Small (5mm)</option>
+                                    <option value="medium" selected>Medium (10mm)</option>
+                                    <option value="large">Large (20mm)</option>
+                                    <option value="none">No Margin</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label for="fileName">Output File Name:</label>
+                                <input type="text" id="fileName" class="option-input" placeholder="Enter file name" value="converted-images">
+                            </div>
+                        </div>
+                        
+                        <button class="process-btn" id="processBtn">
+                            <i class="fas fa-cogs"></i> Convert to PDF
+                        </button>
+                    </div>
+                    
+                    <div class="tool-result" id="toolResult">
+                        <div class="result-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Conversion Successful!</h3>
+                        <p>Your images have been converted to PDF and are ready to download.</p>
+                        <a href="#" class="download-btn" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: #777;">
+                            <i class="fas fa-shield-alt"></i> Your files will be automatically deleted from our servers in 1 hour.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="tool-options" style="margin-top: 40px;">
+                    <h3>About JPG to PDF Converter</h3>
+                    <div class="option-group">
+                        <p>This tool allows you to convert image files (JPG, PNG, BMP, GIF, TIFF) into PDF documents. You can upload multiple images and they will be combined into a single PDF file. Perfect for creating digital photo albums, converting scanned documents, or archiving images in PDF format.</p>
+                    </div>
+                    <div class="option-group">
+                        <h4>Features:</h4>
+                        <ul style="list-style-type: none; padding-left: 20px;">
+                            <li><i class="fas fa-check" style="color: #4CAF50;"></i> Convert multiple images to single PDF</li>
+                            <li><i class="fas fa-check" style="color: #4CAF50;"></i> Support JPG, PNG, BMP, GIF, TIFF formats</li>
+                            <li><i class="fas fa-check" style="color: #4CAF50;"></i> Adjustable page size and orientation</li>
+                            <li><i class="fas fa-check" style="color: #4CAF50;"></i> Custom margins and image positioning</li>
+                            <li><i class="fas fa-check" style="color: #4CAF50;"></i> High-quality conversion</li>
+                            <li><i class="fas fa-check" style="color: #4CAF50;"></i> Secure file handling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>IloveoPDF</h3>
+                    <div class="footer-about">
+                        <p>Free online PDF tools to convert, edit, compress, merge, split, protect, and organize PDF files. No installation required.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>PDF Conversion</h3>
+                    <ul class="footer-links">
+                        <li><a href="jpg-to-pdf.html">JPG to PDF</a></li>
+                        <li><a href="word-to-pdf.html">Word to PDF</a></li>
+                        <li><a href="excel-to-pdf.html">Excel to PDF</a></li>
+                        <li><a href="powerpoint-to-pdf.html">PowerPoint to PDF</a></li>
+                        <li><a href="pdf-to-word.html">PDF to Word</a></li>
+                        <li><a href="pdf-to-jpg.html">PDF to JPG</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>PDF Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="compress-pdf.html">Compress PDF</a></li>
+                        <li><a href="merge-pdf.html">Merge PDF</a></li>
+                        <li><a href="split-pdf.html">Split PDF</a></li>
+                        <li><a href="edit-pdf.html">Edit PDF</a></li>
+                        <li><a href="protect-pdf.html">Protect PDF</a></li>
+                        <li><a href="ocr-pdf.html">OCR PDF</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 IloveoPDF - Free Online PDF Tools. All rights reserved.</p>
+                <div class="footer-contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>iloveopdf@gmail.com</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+            
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+        
+        // File upload functionality
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const toolOptions = document.getElementById('toolOptions');
+        const processBtn = document.getElementById('processBtn');
+        const toolResult = document.getElementById('toolResult');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        // Click on upload area or button
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fileInput.click();
+        });
+        
+        // File input change
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const fileCount = this.files.length;
+                const fileNames = Array.from(this.files).map(file => file.name).join(', ');
+                
+                // Update upload area to show selected files
+                uploadArea.innerHTML = `
+                    <div class="upload-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="upload-text">
+                        <h3>${fileCount} File${fileCount > 1 ? 's' : ''} Selected</h3>
+                        <p><strong>${fileCount} image${fileCount > 1 ? 's' : ''}</strong> ready for conversion</p>
+                        <button class="upload-btn" id="changeFileBtn">
+                            <i class="fas fa-sync-alt"></i> Change Files
+                        </button>
+                    </div>
+                `;
+                
+                // Show options
+                toolOptions.style.display = 'block';
+                
+                // Add event listener to change file button
+                setTimeout(() => {
+                    const changeFileBtn = document.getElementById('changeFileBtn');
+                    if (changeFileBtn) {
+                        changeFileBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            fileInput.click();
+                        });
+                    }
+                }, 100);
+            }
+        });
+        
+        // Process button click
+        processBtn.addEventListener('click', function() {
+            // Show loading state
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+            this.disabled = true;
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                // Show result
+                toolOptions.style.display = 'none';
+                toolResult.style.display = 'block';
+                
+                // Scroll to result
+                toolResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Set download filename
+                const outputName = document.getElementById('fileName').value || 'converted-images';
+                downloadBtn.setAttribute('download', `${outputName}.pdf`);
+                
+                // Reset process button
+                this.innerHTML = '<i class="fas fa-cogs"></i> Convert to PDF';
+                this.disabled = false;
+            }, 2000);
+        });
+        
+        // Download button click (simulated)
+        downloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Create a sample PDF file for download
+            const text = 'Sample PDF generated by IloveoPDF JPG to PDF Converter\n\n';
+            const blob = new Blob([text], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create temporary download link
+            const tempLink = document.createElement('a');
+            tempLink.href = url;
+            tempLink.download = this.getAttribute('download') || 'converted-images.pdf';
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+            
+            // Show success message
+            this.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+            this.style.backgroundColor = '#4CAF50';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                this.style.backgroundColor = '';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
